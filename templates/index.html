@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smile ML Model</title>
+    <link href="{{url_for('static',path='/index.css')}}" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@2.0.3"
+        integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- main container -->
+    <div class="relative px-6 pt-14 lg:px-8 flex flex-col gap-4">
+        <h2 class="text-balance font-semibold text-2xl tracking-tight">ML Smiles Prediction</h2>
+        <!-- smiles input form -->
+        <form hx-post="/analyze" hx-swap="none">
+            <div>
+                <label for="smiles" class="block text-sm/6 font-medium text-gray-900">Smiles String</label>
+                <div class="mt-2 flex gap-4">
+                    <input type="text" name="smiles" id="smiles"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+
+                    <button type="submit" hx-indicator="#loading"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Predict!</button>
+                </div>
+            </div>
+            <p class="htmx-indicator" id="loading">loading...</p>
+        </form>
+
+        <!-- graph and mol visualization -->
+        <div class="flex gap-4 flex-col lg:flex-row justify-center items-center">
+            <div id="graph-container">
+                {% if results is defined and results|length > 0 %}
+                <img src="/results/{{results[0].id}}-graph.png">
+                {% endif %}
+            </div>
+            <div id="mol-container">
+                {% if results is defined and results|length > 0 %}
+                <img src="/results/{{results[0].id}}-mol.png">
+                {% endif %}
+            </div>
+        </div>
+        <h2 class="text-balance font-semibold text-2xl tracking-tight">Previous Predictions</h2>
+        <!-- smiles list -->
+        <ul id="smiles-list" role="list" class="divide-y divide-gray-100">
+            {% for result in results %}
+            <li class="cursor-pointer py-2">
+                <a hx-get="/smiles/{{ result.id }}" hx-swap="none" class="underline">{{ result.smiles }}<a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

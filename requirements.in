@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlmodel
+python-multipart
+nanoid
+
+transformers
+rdkit
+matplotlib
+numpy
+torch
