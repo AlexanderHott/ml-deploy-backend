@@ -1,5 +1,7 @@
 # Smiles ML Model
 
+![image](https://github.com/user-attachments/assets/061b2870-c731-4742-ad3f-c7b8b3cd3abe)
+
 The technoligies I used were
 - fastapi: backend framework
 - htmx: minimal frontend library to make the website feel faster
