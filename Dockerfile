@@ -18,7 +18,7 @@ RUN curl -L https://brandeis.box.com/shared/static/r16dalx2vodecg93da1gb9micrtmc
 
 RUN apt-get install libxrender1 -y
 
-CMD ["fastapi", "run", "backend/main.py", "--host", "0.0.0.0", "--port", "80", "--proxy-headers"]
+CMD ["fastapi", "run", "backend/main.py", "--host", "0.0.0.0", "--port", "80", "--proxy-headers", "--workers", "8"]
 
 # If running behind a proxy like Nginx or Traefik add --proxy-headers
 # CMD ["fastapi", "run", "app/main.py", "--port", "80", "--proxy-headers"]
