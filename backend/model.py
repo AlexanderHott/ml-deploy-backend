@@ -78,5 +78,6 @@ def predict_and_save(model, tokenizer, smiles: str, base_save_path: str) -> np.n
     # plt.show()
     plt.savefig(pred_file, transparent=True)
     plt.clf()
+    plt.cla()
 
     return to_plot
