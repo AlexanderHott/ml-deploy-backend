@@ -1,5 +1,4 @@
-fastapi
-uvicorn
+fastapi[standard]
 sqlmodel
 python-multipart
 nanoid
